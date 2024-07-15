@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ToDoService {
@@ -17,40 +16,33 @@ public class ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
-    public boolean isIdNull(Long id) {
-        return toDoRepository.findById(id).isEmpty();
-    }
-
     public List<ToDo> getToDos() {
         return toDoRepository.findAll();
     }
 
-
-    public Optional<ToDo> getToDo(Long id) {
-        if (isIdNull(id)) {
-            throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
-        }
-        return toDoRepository.findById(id);
+    public ToDo getToDo(Long id) {
+        return toDoRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Could not find toDo with id: " + id)
+        );
     }
 
     public void deleteToDo(Long id) {
-        if (isIdNull(id)) {
-            throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
-        }
-        toDoRepository.deleteById(id);
+        ToDo toDo = this.getToDo(id);
+        toDoRepository.delete(toDo);
     }
 
-    public void addToDo(ToDo toDo) {
-        toDoRepository.save(toDo);
+    public ToDo addToDo(ToDo toDo) {
+        return toDoRepository.save(toDo);
     }
 
     public void updateToDo(Long id, ToDo toDo) {
-        if (isIdNull(id)) {
-            throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
-        }
-        ToDo var_ToDo = toDoRepository.findById(id).get();
-        var_ToDo.setTitle(toDo.getTitle());
-        var_ToDo.setDescription(toDo.getDescription());
-        toDoRepository.save(var_ToDo);
+        ToDo userToDo = this.getToDo(id);
+
+        if (toDo.getTitle() != null)
+            userToDo.setTitle(toDo.getTitle());
+        if (toDo.getDescription() != null)
+            userToDo.setDescription(toDo.getDescription());
+
+        toDoRepository.save(userToDo);
     }
 }
