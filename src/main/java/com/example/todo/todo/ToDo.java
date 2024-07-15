@@ -1,9 +1,11 @@
-package com.example.todo;
+package com.example.todo.todo;
 
 
+import com.example.todo.user.User;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "to_dos")
 public class ToDo {
     @Id
     @SequenceGenerator(
@@ -19,14 +21,20 @@ public class ToDo {
     private String title;
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    public ToDo(Long id, String title, String description) {
+
+    public ToDo(Long id, String title, String description, User user) {
+        this.user = user;
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public ToDo(String title, String description) {
+    public ToDo(String title, String description, User user) {
+        this.user = user;
         this.title = title;
         this.description = description;
     }
@@ -57,6 +65,14 @@ public class ToDo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todo.todo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class ToDoService {
         this.toDoRepository = toDoRepository;
     }
 
-    public boolean isIdExist(Long id) {
+    public boolean isIdNull(Long id) {
         return toDoRepository.findById(id).isEmpty();
     }
 
@@ -27,14 +27,14 @@ public class ToDoService {
 
 
     public Optional<ToDo> getToDo(Long id) {
-        if (isIdExist(id)) {
+        if (isIdNull(id)) {
             throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
         }
         return toDoRepository.findById(id);
     }
 
     public void deleteToDo(Long id) {
-        if (isIdExist(id)) {
+        if (isIdNull(id)) {
             throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
         }
         toDoRepository.deleteById(id);
@@ -45,7 +45,7 @@ public class ToDoService {
     }
 
     public void updateToDo(Long id, ToDo toDo) {
-        if (isIdExist(id)) {
+        if (isIdNull(id)) {
             throw new IllegalArgumentException("To-Do with id " + id + " does not exist");
         }
         ToDo var_ToDo = toDoRepository.findById(id).get();
