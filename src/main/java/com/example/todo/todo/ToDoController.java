@@ -23,32 +23,23 @@ public class ToDoController {
     }
 
     @GetMapping("{id}")
-    public ToDo getToDo(
-            @PathVariable Long id) {
-        return toDoService.getToDo(id).orElseThrow(
-                ()-> new RuntimeException("Could not find toDo with id: " + id)
-        );
+    public ToDo getToDo(@PathVariable Long id) {
+        return toDoService.getToDo(id);
     }
 
     @DeleteMapping("{id}")
-    public void deleteToDo(
-            @PathVariable Long id
-    ){
+    public void deleteToDo(@PathVariable Long id){
         toDoService.deleteToDo(id);
     }
 
     @PostMapping
-    public void addToDo(
-            @RequestBody ToDo toDo
-    ){
-        toDoService.addToDo(toDo);
+    public ToDo addToDo(@RequestBody ToDo toDo){
+        return toDoService.addToDo(toDo);
     }
 
     @PutMapping("{id}")
-    public void updateToDo(
-            @PathVariable Long id,
-            @RequestBody ToDo toDo
-    ){
+    public void updateToDo(@PathVariable Long id,
+                           @RequestBody ToDo toDo){
         toDoService.updateToDo(id, toDo);
     }
 

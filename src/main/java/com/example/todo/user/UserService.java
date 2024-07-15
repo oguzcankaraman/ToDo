@@ -1,6 +1,7 @@
 package com.example.todo.user;
 
 import com.example.todo.todo.ToDo;
+import com.example.todo.todo.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
 
     @Autowired
     public UserService(UserRepository userRepository) {
