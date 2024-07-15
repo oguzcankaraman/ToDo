@@ -5,7 +5,7 @@ import com.example.todo.user.User;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "to_dos")
+@Table(name = "to_do")
 public class ToDo {
     @Id
     @SequenceGenerator(
@@ -21,7 +21,7 @@ public class ToDo {
     private String title;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
