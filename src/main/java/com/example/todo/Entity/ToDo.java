@@ -1,7 +1,6 @@
 package com.example.todo.Entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +26,6 @@ public class ToDo {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
-    @JsonIgnore
     private User user;
 
 

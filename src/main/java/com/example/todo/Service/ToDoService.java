@@ -47,13 +47,13 @@ public class ToDoService {
         toDoRepository.delete(toDo);
     }
 
-    public void updateToDo(Long id, ToDo toDo) {
+    public void updateToDo(Long id, ToDoDTO toDo) {
         ToDo userToDo = this.findToDo(id);
 
-        if (toDo.getTitle() != null)
-            userToDo.setTitle(toDo.getTitle());
-        if (toDo.getDescription() != null)
-            userToDo.setDescription(toDo.getDescription());
+        if (toDo.title() != null)
+            userToDo.setTitle(toDo.title());
+        if (toDo.description() != null)
+            userToDo.setDescription(toDo.description());
 
         toDoRepository.save(userToDo);
     }

@@ -28,6 +28,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ToDo> toDos;
 
+
     public User(Long id, String username, List<ToDo> toDos) {
         this.toDos = toDos;
         this.id = id;

@@ -1,7 +1,6 @@
 package com.example.todo.Controller;
 
 import com.example.todo.DTO.ToDoDTO;
-import com.example.todo.Entity.ToDo;
 import com.example.todo.Service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,7 @@ public class ToDoController {
 
     @PutMapping("{id}")
     public void updateToDo(@PathVariable Long id,
-                           @RequestBody ToDo toDo){
+                           @RequestBody ToDoDTO toDo){
         toDoService.updateToDo(id, toDo);
     }
 

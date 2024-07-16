@@ -38,7 +38,6 @@ public class UserController {
         userService.createUser(user);
     }
 
-    //TODO: add todo to user function
     @PostMapping("/todo")
     public void addToDoToUser(@RequestParam Long userId,
                               @RequestBody ToDoDTO toDo){
