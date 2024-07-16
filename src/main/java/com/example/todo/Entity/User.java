@@ -1,10 +1,13 @@
-package com.example.todo.user;
+package com.example.todo.Entity;
 
-import com.example.todo.todo.ToDo;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,23 +21,20 @@ public class User {
             generator = "user_sequence",
             strategy = GenerationType.SEQUENCE
     )
-    private Long userId;
+    private Long id;
 
     private String username;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ToDo> toDos;
 
-    public User(Long userId, String username, List<ToDo> toDos) {
+    public User(Long id, String username, List<ToDo> toDos) {
         this.toDos = toDos;
-        this.userId = userId;
+        this.id = id;
         this.username = username;
     }
 
     public User(String username, List<ToDo> toDos) {
-        for (ToDo toDo : toDos) {
-            toDo.setUser(this);
-        }
         this.toDos = toDos;
         this.username = username;
     }
@@ -42,34 +42,14 @@ public class User {
     public User() {
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<ToDo> getToDos() {
-        return toDos;
-    }
-
-    public void setToDos(List<ToDo> toDos) {
-        this.toDos = toDos;
+    public void addToDo(ToDo toDo) {
+        toDos.add(toDo);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", username='" + username + '\'' +
                 ", toDos=" + toDos +
                 '}';

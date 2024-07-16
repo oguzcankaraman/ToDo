@@ -1,5 +1,8 @@
-package com.example.todo.todo;
+package com.example.todo.Controller;
 
+import com.example.todo.DTO.ToDoDTO;
+import com.example.todo.Entity.ToDo;
+import com.example.todo.Service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +21,12 @@ public class ToDoController {
     }
 
     @GetMapping
-    public List<ToDo> getToDos() {
+    public List<ToDoDTO> getToDos() {
         return toDoService.getToDos();
     }
 
     @GetMapping("{id}")
-    public ToDo getToDo(@PathVariable Long id) {
+    public ToDoDTO getToDo(@PathVariable Long id) {
         return toDoService.getToDo(id);
     }
 
@@ -32,10 +35,7 @@ public class ToDoController {
         toDoService.deleteToDo(id);
     }
 
-    @PostMapping
-    public ToDo addToDo(@RequestBody ToDo toDo){
-        return toDoService.addToDo(toDo);
-    }
+
 
     @PutMapping("{id}")
     public void updateToDo(@PathVariable Long id,

@@ -1,6 +1,9 @@
-package com.example.todo.user;
+package com.example.todo.Controller;
 
-import com.example.todo.todo.ToDo;
+import com.example.todo.DTO.ToDoDTO;
+import com.example.todo.DTO.UserDTO;
+import com.example.todo.Entity.User;
+import com.example.todo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +21,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
 
     @GetMapping("{userId}")
-    public User getUser(
+    public UserDTO getUser(
             @PathVariable Long userId) {
         return userService.getUser(userId);
     }
@@ -35,12 +38,11 @@ public class UserController {
         userService.createUser(user);
     }
 
-    @PutMapping("{userId}")
-    public void updateUserToDos(
-            @RequestBody List<ToDo> toDos,
-            @PathVariable Long userId
-    ){
-        userService.updateUserToDos(userId, toDos);
+    //TODO: add todo to user function
+    @PostMapping("/todo")
+    public void addToDoToUser(@RequestParam Long userId,
+                              @RequestBody ToDoDTO toDo){
+        userService.addToDo(userId, toDo);
     }
 
     @DeleteMapping("{userId}")

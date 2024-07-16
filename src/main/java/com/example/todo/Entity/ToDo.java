@@ -1,9 +1,13 @@
-package com.example.todo.todo;
+package com.example.todo.Entity;
 
 
-import com.example.todo.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "to_do")
 public class ToDo {
@@ -23,6 +27,7 @@ public class ToDo {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
 
@@ -39,40 +44,13 @@ public class ToDo {
         this.description = description;
     }
 
-    public ToDo() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
+    public ToDo(String title, String description) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public ToDo() {
 
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Override
