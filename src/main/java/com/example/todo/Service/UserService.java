@@ -26,10 +26,12 @@ public class UserService {
 
     public void addToDo(Long userId, ToDoDTO toDo) {
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new RuntimeException("User whit id "+userId+ " not found")
+                () -> new RuntimeException("User whit id "+ userId + " not found")
         );
         ToDo toDoToAdd = new ToDo(toDo.title(),
-                                  toDo.description()
+                                  toDo.description(),
+                                  toDo.startDate(),
+                                  toDo.expirationDate()
         );
         toDoToAdd.setUser(user);
         user.addToDo(toDoToAdd);
@@ -60,4 +62,5 @@ public class UserService {
         );
         userRepository.delete(user);
     }
+
 }

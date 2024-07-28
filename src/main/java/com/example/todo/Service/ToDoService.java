@@ -24,7 +24,7 @@ public class ToDoService {
     }
 
     public List<ToDoDTO> getToDos() {
-        return toDoRepository.findAll()
+        return toDoRepository.findAllNonExpired()
                 .stream().map(toDoDTOMap).collect(Collectors.toList());
     }
 
@@ -38,8 +38,8 @@ public class ToDoService {
         return toDoRepository.findById(id)
                 .map(toDoDTOMap).
                 orElseThrow(
-                () -> new RuntimeException("Could not find toDo with id: " + id)
-        );
+                        () -> new RuntimeException("Could not find toDo with id: " + id)
+                );
     }
 
     public void deleteToDo(Long id) {
@@ -54,7 +54,16 @@ public class ToDoService {
             userToDo.setTitle(toDo.title());
         if (toDo.description() != null)
             userToDo.setDescription(toDo.description());
+        if (toDo.startDate() != null)
+            userToDo.setStartDate(toDo.startDate());
+        if (toDo.expirationDate() != null)
+            userToDo.setExpirationDate(toDo.expirationDate());
 
         toDoRepository.save(userToDo);
+    }
+
+    public List<ToDoDTO> getToDosByUser(Long userId) {
+        return toDoRepository.findAllNonExpiredByUserId(userId).
+                stream().map(toDoDTOMap).collect(Collectors.toList());
     }
 }

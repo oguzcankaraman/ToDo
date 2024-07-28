@@ -34,7 +34,10 @@ public class ToDoController {
         toDoService.deleteToDo(id);
     }
 
-
+    @GetMapping("user/{userID}")
+    public List<ToDoDTO> getToDosByUser(@PathVariable Long userID) {
+        return toDoService.getToDosByUser(userID);
+    }
 
     @PutMapping("{id}")
     public void updateToDo(@PathVariable Long id,

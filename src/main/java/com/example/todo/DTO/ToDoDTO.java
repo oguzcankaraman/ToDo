@@ -1,7 +1,11 @@
 package com.example.todo.DTO;
 
+import java.time.LocalDate;
+
 public record ToDoDTO(
         String title,
-        String description
+        String description,
+        LocalDate startDate,
+        LocalDate expirationDate
 ) {
 }

@@ -2,11 +2,13 @@ package com.example.todo.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Table;
+import lombok.Data;
 
-@Setter
-@Getter
+
+import java.time.LocalDate;
+
+@Data
 @Entity
 @Table(name = "to_do")
 public class ToDo {
@@ -23,6 +25,8 @@ public class ToDo {
     private Long id;
     private String title;
     private String description;
+    private LocalDate startDate;
+    private LocalDate expirationDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
@@ -42,7 +46,9 @@ public class ToDo {
         this.description = description;
     }
 
-    public ToDo(String title, String description) {
+    public ToDo(String title, String description, LocalDate startDate, LocalDate expirationDate) {
+        this.startDate = startDate;
+        this.expirationDate = expirationDate;
         this.title = title;
         this.description = description;
     }

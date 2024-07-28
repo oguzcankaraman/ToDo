@@ -9,8 +9,10 @@ import java.util.function.Function;
 public class ToDoDTOMap implements Function<ToDo, ToDoDTO> {
     @Override
     public ToDoDTO apply(ToDo toDo) {
-        return new ToDoDTO(toDo.getTitle(),
-                           toDo.getDescription()
+        return new ToDoDTO( toDo.getTitle(),
+                            toDo.getDescription(),
+                            toDo.getStartDate(),
+                            toDo.getExpirationDate()
         );
     }
 }

@@ -34,20 +34,20 @@ public class UserController {
     @PostMapping
     public void createUser(
             @RequestBody User user
-    ){
+    ) {
         userService.createUser(user);
     }
 
     @PostMapping("/todo")
     public void addToDoToUser(@RequestParam Long userId,
-                              @RequestBody ToDoDTO toDo){
+                              @RequestBody ToDoDTO toDo) {
         userService.addToDo(userId, toDo);
     }
 
     @DeleteMapping("{userId}")
     public void deleteUser(
             @PathVariable Long userId
-    ){
+    ) {
         userService.deleteUser(userId);
     }
 
