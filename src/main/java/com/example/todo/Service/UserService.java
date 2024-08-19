@@ -31,7 +31,8 @@ public class UserService {
         ToDo toDoToAdd = new ToDo(toDo.title(),
                                   toDo.description(),
                                   toDo.startDate(),
-                                  toDo.expirationDate()
+                                  toDo.expirationDate(),
+                                  toDo.completed()
         );
         toDoToAdd.setUser(user);
         user.addToDo(toDoToAdd);

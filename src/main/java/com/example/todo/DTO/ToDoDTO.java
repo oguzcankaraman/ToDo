@@ -6,6 +6,7 @@ public record ToDoDTO(
         String title,
         String description,
         LocalDate startDate,
-        LocalDate expirationDate
+        LocalDate expirationDate,
+        Boolean completed
 ) {
 }

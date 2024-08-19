@@ -12,7 +12,8 @@ public class ToDoDTOMap implements Function<ToDo, ToDoDTO> {
         return new ToDoDTO( toDo.getTitle(),
                             toDo.getDescription(),
                             toDo.getStartDate(),
-                            toDo.getExpirationDate()
+                            toDo.getExpirationDate(),
+                            toDo.getCompleted()
         );
     }
 }

@@ -27,6 +27,9 @@ public class ToDo {
     private String description;
     private LocalDate startDate;
     private LocalDate expirationDate;
+    private Boolean completed;
+    private Boolean scheduled;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
@@ -46,7 +49,8 @@ public class ToDo {
         this.description = description;
     }
 
-    public ToDo(String title, String description, LocalDate startDate, LocalDate expirationDate) {
+    public ToDo(String title, String description, LocalDate startDate, LocalDate expirationDate, Boolean completed) {
+        this.completed = completed;
         this.startDate = startDate;
         this.expirationDate = expirationDate;
         this.title = title;
